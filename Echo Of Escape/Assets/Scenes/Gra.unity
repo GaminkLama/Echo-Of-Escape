@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2993359700678343425, guid: 4e87dae2451a1d746b369ef7b42c04bc, type: 3}
+  firePoint: {fileID: 901069655}
   bulletSpeed: 6
   attackCooldown: 0.5
 --- !u!114 &104830176
@@ -755,8 +756,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982014546}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.71, y: 0.01, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.71, y: 0.00999999, z: 0}
   m_LocalScale: {x: 0.5, y: 9.9869175, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
