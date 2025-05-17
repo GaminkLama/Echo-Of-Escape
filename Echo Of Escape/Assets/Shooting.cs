@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public Transform firePoint;
+    private Transform firePoint;
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private float fireCooldown = 0.5f; // czas miêdzy strza³ami
 

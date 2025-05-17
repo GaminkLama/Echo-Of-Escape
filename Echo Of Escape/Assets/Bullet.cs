@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float lifetime = 5f;
-    [SerializeField] private int damage;
+    [SerializeField] private int bulletDamage;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(bulletDamage);
         }
 
         // Zniszcz pocisk w ka¿dym przypadku
