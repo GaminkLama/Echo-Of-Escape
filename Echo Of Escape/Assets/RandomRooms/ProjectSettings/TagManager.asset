@@ -4,18 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - New tag
   - SpawnPoint
   - Rooms
-  - Player I Entry
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Bullet
+  - 
   - 
   - 
   - 
