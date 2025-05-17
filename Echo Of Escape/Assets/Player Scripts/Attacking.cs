@@ -4,36 +4,34 @@ using UnityEngine;
 
 public class Attacking : MonoBehaviour
 {
-    /*public GameObject squarePrefab;
-    private Transform firePoint;
-    [SerializeField] private float attackCooldown = 1f;
+    public GameObject squarePrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float attackCooldown = 2f;
 
     private float nextAttackTime = 0f;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && Time.time >= nextAttackTime)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextAttackTime)
         {
             Attack();
-            nextAttackTime = Time.time + fireCooldown;
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 
     void Attack()
     {
-        /*Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mouseWorldPos - firePoint.position).normalized;
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        GameObject square = Instantiate(squarePrefab, firePoint.position, Quaternion.identity);
+        Rigidbody2D rb = square.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = direction * bulletSpeed;
+            rb.velocity = direction;
         }
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        
+        square.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-    */
 }

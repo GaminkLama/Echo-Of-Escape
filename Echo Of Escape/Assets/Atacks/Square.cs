@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Square : MonoBehaviour
 {
-    [SerializeField] private float lifetime = 5f;
+    [SerializeField] private float lifetime;
     [SerializeField] private int attackDamage;
 
     void Start()
@@ -21,7 +21,5 @@ public class Square : MonoBehaviour
             enemy.TakeDamage(attackDamage);
         }
 
-        // Zniszcz pocisk w ka¿dym przypadku
-        Destroy(gameObject);
     }
 }
