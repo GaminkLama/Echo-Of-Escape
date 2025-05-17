@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class Attacking : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    /*public GameObject squarePrefab;
     private Transform firePoint;
-    [SerializeField] private float bulletSpeed = 10f;
-    [SerializeField] private float attackCooldown = 0.5f; // czas miêdzy strza³ami
+    [SerializeField] private float attackCooldown = 1f;
 
     private float nextAttackTime = 0f;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextAttackTime)
+        if (Input.GetKeyDown(KeyCode.G) && Time.time >= nextAttackTime)
         {
-            ShootTowardsMouse();
-            nextAttackTime = Time.time + attackCooldown;
+            Attack();
+            nextAttackTime = Time.time + fireCooldown;
         }
     }
 
-    void ShootTowardsMouse()
+    void Attack()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        /*Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mouseWorldPos - firePoint.position).normalized;
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
@@ -34,5 +33,7 @@ public class Shooting : MonoBehaviour
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        
     }
+    */
 }
