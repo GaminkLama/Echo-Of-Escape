@@ -12,7 +12,7 @@ public class Square : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         // Sprawdü, czy obiekt ma EnemyHealth
         EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
