@@ -1,26 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControllerIsaac : MonoBehaviour
 {
-    public static CameraControllerIsaac Instance;
+    public Transform player;
+    public Vector2 roomSize = new Vector2(16f, 9f); // szerokoœæ i wysokoœæ pokoju
+    public float smoothSpeed = 5f;
 
-    public float moveSpeed = 5f;
-    private Vector3 targetPosition;
+    private Vector3 targetPos;
 
-    private void Start()
+    void LateUpdate()
     {
-        targetPosition = transform.position;
-    }
+        int roomX = Mathf.FloorToInt(player.position.x / roomSize.x);
+        int roomY = Mathf.FloorToInt(player.position.y / roomSize.y);
 
-    private void Update()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-    }
+        targetPos = new Vector3(roomX * roomSize.x, roomY * roomSize.y, transform.position.z);
 
-    public void MoveToRoom(Vector2 roomCenter)
-    {
-        targetPosition = new Vector3(roomCenter.x, roomCenter.y, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
     }
 }
