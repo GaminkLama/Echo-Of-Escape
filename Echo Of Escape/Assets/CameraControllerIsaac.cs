@@ -2,20 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraControllerIsaac : MonoBehaviour
 {
-    public static CameraController Instance;
+    public static CameraControllerIsaac Instance;
 
     public float moveSpeed = 5f;
     private Vector3 targetPosition;
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     private void Start()
     {
