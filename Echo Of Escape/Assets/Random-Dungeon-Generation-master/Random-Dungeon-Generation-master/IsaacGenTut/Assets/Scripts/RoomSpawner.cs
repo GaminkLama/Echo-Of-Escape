@@ -47,19 +47,26 @@ public class RoomSpawner : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-		if(other.CompareTag("SpawnPoint")){
-			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
-				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-				Destroy(gameObject);
-			} 
-			spawned = true;
-		}
-		// Jeśli obiekt ma tag "Player", nic nie rób
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		Debug.Log("Trigger detected: " + other.gameObject.name);
 		if (other.CompareTag("Player"))
 		{
+			Debug.Log("Player entered, ignoring...");
 			return;
 		}
+
+		if (other.CompareTag("SpawnPoint"))
+		{
+			Debug.Log("SpawnPoint detected");
+			if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+			{
+				Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+				Destroy(gameObject);
+			}
+			spawned = true;
+		}
 	}
+
 }
 
