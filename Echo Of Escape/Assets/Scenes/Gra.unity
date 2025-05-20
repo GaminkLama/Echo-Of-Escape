@@ -316,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33c5c8df27cbf043a14be7bb5c41d54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squarePrefab: {fileID: 0}
-  firePoint: {fileID: 0}
+  squarePrefab: {fileID: 6799053713627144742, guid: d6def21c32c2c6749a553ee67ccfdbe9, type: 3}
+  firePoint: {fileID: 901069655}
   attackCooldown: 2
   attackRange: 1
 --- !u!1 &840305686
