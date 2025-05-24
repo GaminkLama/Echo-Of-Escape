@@ -10,9 +10,13 @@ public class MapGenerator : MonoBehaviour
     private int[] floorPlan;
 
     private int floorPlanCount;
-    private int minRooms;
-    private int maxRooms;
+    public int minRooms = 7;
+    public int maxRooms = 15;
     private List<int> endRooms;
+
+    public GameObject mapObject;
+
+    public Transform parentTransform;   
 
     private int bossRoomIndex;
     private int secretRoomIndex;
@@ -20,9 +24,9 @@ public class MapGenerator : MonoBehaviour
     private int itemRoomIndex;
 
     public Cell cellPrefab;
-    private float cellSize;
+    public float cellSize = 0.5f;
     private Queue<int> cellQueue;
-    private List<Cell> spawnedCells;
+    public List<Cell> spawnedCells;
     private List<int> bigRoomIndexes;
 
     [Header("Sprite References")]
@@ -36,6 +40,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Sprite verticalRoom;
     [SerializeField] private Sprite horizontalRoom;
     [SerializeField] private Sprite lShapeRoom;
+
+
 
     private static readonly List<int[]> roomShapes = new()
     {
@@ -70,24 +76,21 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        minRooms = 7;
-        maxRooms = 15;
-        cellSize = 0.5f;
         spawnedCells = new();
-
-        SetupDungeon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetupDungeon();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SetupDungeon();
+        //}
     }
 
-    void SetupDungeon()
+
+
+    public void SetupDungeon()
     {
         for (int i = 0; i < spawnedCells.Count; i++)
         {
@@ -106,6 +109,8 @@ public class MapGenerator : MonoBehaviour
 
         GenerateDungeon();
     }
+
+
 
     void GenerateDungeon()
     {
@@ -274,7 +279,7 @@ public class MapGenerator : MonoBehaviour
         int y = index / 10;
         Vector2 position = new Vector2(x * cellSize, -y * cellSize);
 
-        Cell newCell = Instantiate(cellPrefab, position, Quaternion.identity);
+        Cell newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
         newCell.value = 1;
         newCell.index = index;
 
@@ -341,14 +346,14 @@ public class MapGenerator : MonoBehaviour
         {
             Vector2 position = new Vector2(combinedX / 4 * cellSize + offset, -combinedY / 4 * cellSize - offset);
 
-            newCell = Instantiate(cellPrefab, position, Quaternion.identity);
+            newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
             newCell.SetRoomSprite(largeRoom);
         }
 
         if (largeRoomIndexes.Count == 3)
         {
             Vector2 position = new Vector2(combinedX / 3 * cellSize + offset, -combinedY / 3 * cellSize - offset);
-            newCell = Instantiate(cellPrefab, position, Quaternion.identity);
+            newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
             newCell.SetRoomSprite(lShapeRoom);
             newCell.RotateCell(largeRoomIndexes);
         }
@@ -358,13 +363,13 @@ public class MapGenerator : MonoBehaviour
             if (largeRoomIndexes[0] + 10 == largeRoomIndexes[1] || largeRoomIndexes[0] - 10 == largeRoomIndexes[1])
             {
                 Vector2 position = new Vector2(combinedX / 2 * cellSize, -combinedY / 2 * cellSize - offset);
-                newCell = Instantiate(cellPrefab, position, Quaternion.identity);
+                newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
                 newCell.SetRoomSprite(verticalRoom);
             }
             else if (largeRoomIndexes[0] + 1 == largeRoomIndexes[1] || largeRoomIndexes[0] - 1 == largeRoomIndexes[1])
             {
                 Vector2 position = new Vector2(combinedX / 2 * cellSize + offset, -combinedY / 2 * cellSize);
-                newCell = Instantiate(cellPrefab, position, Quaternion.identity);
+                newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
                 newCell.SetRoomSprite(horizontalRoom);
             }
         }

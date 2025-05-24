@@ -10,6 +10,17 @@ public class Cell : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public SpriteRenderer roomSprite;
 
+    private void Start()
+    {
+    }
+
+    public void activate(bool act)
+    {
+        Debug.Log("asd");
+        gameObject.SetActive(act);
+
+    }
+
     public void SetSpecialRoomSprite(Sprite icon)
     {
         spriteRenderer.sprite = icon;

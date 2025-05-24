@@ -265,11 +265,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2013546066970320520, guid: 4fbc7bc1fd5729946808df9564e0afd6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.4
+      value: -5.74
       objectReference: {fileID: 0}
     - target: {fileID: 2013546066970320520, guid: 4fbc7bc1fd5729946808df9564e0afd6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.06
+      value: -8.05
       objectReference: {fileID: 0}
     - target: {fileID: 2013546066970320520, guid: 4fbc7bc1fd5729946808df9564e0afd6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -415,7 +415,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1507803980
 BoxCollider2D:
   m_ObjectHideFlags: 0
