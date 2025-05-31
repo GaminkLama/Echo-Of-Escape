@@ -1,366 +1,109 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
-
 
 public class MapGenerator : MonoBehaviour
 {
-    private int[] floorPlan;
+    [Header("Room Settings")]
+    public Cell roomPrefab;
+    public Transform roomParent;
+    public int roomCount = 12;
+    public float roomSpacing = 10f;
 
-    private int floorPlanCount;
-    public int minRooms = 7;
-    public int maxRooms = 15;
-    private List<int> endRooms;
+    [Header("Special Room Sprites")]
+    public Sprite bossSprite;
+    public Sprite shopSprite;
+    public Sprite itemSprite;
+    public Sprite secretSprite;
 
-    public GameObject mapObject;
+    private Dictionary<Vector2Int, Cell> rooms = new();
+    private List<Vector2Int> roomPositions = new();
 
-    private HashSet<int> usedIndexes = new HashSet<int>();
-
-    public Transform parentTransform;   
-
-    private int bossRoomIndex;
-    private int secretRoomIndex;
-    private int shopRoomIndex;
-    private int itemRoomIndex;
-
-    public Cell cellPrefab;
-    public float cellSize = 0.5f;
-    private Queue<int> cellQueue;
-    public List<Cell> spawnedCells;
-    private List<int> bigRoomIndexes;
-
-    [Header("Sprite References")]
-    [SerializeField] private Sprite item;
-    [SerializeField] private Sprite shop;
-    [SerializeField] private Sprite boss;
-    [SerializeField] private Sprite secret;
-
-    [Header("Gameplay Room Prefabs")]
-    public GameObject normalRoomPrefab;
-    public GameObject bossRoomPrefab;
-    public GameObject shopRoomPrefab;
-    public GameObject itemRoomPrefab;
-    public GameObject secretRoomPrefab;
-
-
-    [Header("Room Variations")]
-    [SerializeField] private Sprite largeRoom;
-    [SerializeField] private Sprite verticalRoom;
-    [SerializeField] private Sprite horizontalRoom;
-    [SerializeField] private Sprite lShapeRoom;
-
-
-
-    private static readonly List<int[]> roomShapes = new()
-    {
-        new int[] { -1 },
-        new int[] { 1 },
-
-        new int[] { 10 },
-        new int[] { -10 },
-
-        new int[] { 1, 10 },
-        new int[] { 1, 11 },
-        new int[] { 10, 11 },
-
-        new int[] { 9, 10 },
-        new int[] { -1, 9 },
-        new int[] { -1, 10 },
-
-        new int[] { 1, -10 },
-        new int[] { 1, -9 },
-        new int[] { -9, -10 },
-
-        new int[] { -1, -10 },
-        new int[] { -1, -11 },
-        new int[] { -10, -11 },
-
-        new int[] { 1, 10, 11 },
-        new int[] { 1, -9, -10 },
-        new int[] { -1, 9, 10 },
-        new int[] { -1, -10, -11 }
-    };
-
-    // Start is called before the first frame update
     void Start()
     {
-        spawnedCells = new();
+        GenerateRooms();
     }
 
-    // Update is called once per frame
-    void Update()
+    void GenerateRooms()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    SetupDungeon();
-        //}
-    }
+        Vector2Int start = Vector2Int.zero;
+        AddRoom(start);
+        Queue<Vector2Int> expansionQueue = new Queue<Vector2Int>();
+        expansionQueue.Enqueue(start);
 
-
-
-    public void SetupDungeon()
-    {
-        for (int i = 0; i < spawnedCells.Count; i++)
+        while (rooms.Count < roomCount && expansionQueue.Count > 0)
         {
-            Destroy(spawnedCells[i].gameObject);
-        }
+            Vector2Int current = expansionQueue.Dequeue();
 
-        spawnedCells.Clear();
-
-        floorPlan = new int[100];
-        floorPlanCount = default;
-        cellQueue = new Queue<int>();
-        endRooms = new List<int>();
-        bigRoomIndexes = new List<int>();
-
-        VisitCell(45);
-
-        GenerateDungeon();
-    }
-
-
-
-    void GenerateDungeon()
-    {
-        while (cellQueue.Count > 0)
-        {
-            int index = cellQueue.Dequeue();
-            int x = index % 10;
-
-            bool created = false;
-
-            if (x > 1) created |= VisitCell(index - 1);
-            if (x < 9) created |= VisitCell(index + 1);
-            if (index > 20) created |= VisitCell(index - 10);
-            if (index < 70) created |= VisitCell(index + 10);
-
-            if (created == false)
-                endRooms.Add(index);
-        }
-
-        if (floorPlanCount < minRooms)
-        {
-            SetupDungeon();
-            return;
-        }
-
-        CleanEndRoomsList();
-
-        SetupSpecialRooms();
-    }
-
-    void CleanEndRoomsList()
-    {
-        endRooms.RemoveAll(item => bigRoomIndexes.Contains(item) || GetNeighbourCount(item) > 1);
-    }
-
-    void SetupSpecialRooms()
-    {
-        bossRoomIndex = endRooms.Count > 0 ? endRooms[endRooms.Count - 1] : -1;
-
-        if (bossRoomIndex != -1)
-        {
-            endRooms.RemoveAt(endRooms.Count - 1);
-        }
-
-        itemRoomIndex = RandomEndRoom();
-        shopRoomIndex = RandomEndRoom();
-        secretRoomIndex = PickSecretRoom();
-
-        if (itemRoomIndex == -1 || shopRoomIndex == -1 || bossRoomIndex == -1 || secretRoomIndex == -1)
-        {
-            SetupDungeon();
-            return;
-        }
-
-        SpawnRoom(secretRoomIndex, RoomType.Secret);
-
-
-        UpdateSpecialRoomVisuals();
-    }
-
-    void UpdateSpecialRoomVisuals()
-    {
-        foreach (var cell in spawnedCells)
-        {
-            if (cell.index == itemRoomIndex)
+            foreach (Vector2Int dir in Directions())
             {
-                cell.SetSpecialRoomSprite(item);
-                cell.SetRoomType(RoomType.Item);
-            }
-
-            if (cell.index == shopRoomIndex)
-            {
-                cell.SetSpecialRoomSprite(shop);
-                cell.SetRoomType(RoomType.Boss);
-            }
-
-            if (cell.index == bossRoomIndex)
-            {
-                cell.SetSpecialRoomSprite(boss);
-                cell.SetRoomType(RoomType.Boss);
-            }
-
-            if (cell.index == secretRoomIndex)
-            {
-                cell.SetSpecialRoomSprite(secret);
-                cell.SetRoomType(RoomType.Secret);
-            }
-        }
-    }
-
-    int RandomEndRoom()
-    {
-        if (endRooms.Count == 0) return -1;
-
-        int randomRoom = Random.Range(0, endRooms.Count);
-        int index = endRooms[randomRoom];
-
-        endRooms.RemoveAt(randomRoom);
-
-        return index;
-    }
-
-    int PickSecretRoom()
-    {
-        for (int attempt = 0; attempt < 900; attempt++)
-        {
-            int x = Mathf.FloorToInt(Random.Range(0f, 1f) * 9) + 1;
-            int y = Mathf.FloorToInt(Random.Range(0f, 1f) * 8) + 2;
-
-            int index = y * 10 + x;
-
-            if (floorPlan[index] != 0)
-            {
-                continue;
-            }
-
-            if (bossRoomIndex == index - 1 || bossRoomIndex == index + 1 || bossRoomIndex == index + 10 || bossRoomIndex == index - 10)
-            {
-                continue;
-            }
-
-            if (index - 1 < 0 || index + 1 > floorPlan.Length || index - 10 < 0 || index + 10 > floorPlan.Length)
-            {
-                continue;
-            }
-
-            int neighbours = GetNeighbourCount(index);
-
-            if (neighbours >= 3 || (attempt > 300 && neighbours >= 2) || (attempt > 600 && neighbours >= 1))
-            {
-                return index;
-            }
-        }
-
-        return -1;
-    }
-
-    private int GetNeighbourCount(int index)
-    {
-        return floorPlan[index - 10] + floorPlan[index - 1] + floorPlan[index + 1] + floorPlan[index + 10];
-    }
-
-    private bool VisitCell(int index)
-    {
-        if (floorPlan[index] != 0 || GetNeighbourCount(index) > 1 || floorPlanCount > maxRooms || Random.value < 0.5f)
-            return false;
-
-        if (Random.value < 0.3f && index != 45)
-        {
-            foreach (var shape in roomShapes.OrderBy(_ => Random.value))
-            {
-                if (TryPlaceRoom(index, shape))
+                Vector2Int next = current + dir;
+                if (!rooms.ContainsKey(next) && Random.value < 0.5f)
                 {
-                    return true;
+                    AddRoom(next);
+                    expansionQueue.Enqueue(next);
+
+                    if (rooms.Count >= roomCount)
+                        break;
                 }
             }
         }
 
-        cellQueue.Enqueue(index);
-        floorPlan[index] = 1;
-        floorPlanCount++;
-
-        SpawnRoom(index, RoomType.Normal);
-
-        return true;
+        AssignSpecialRooms();
     }
 
-    private void SpawnRoom(int index, RoomType type)
+    void AddRoom(Vector2Int gridPos)
     {
-        int x = index % 10;
-        int y = index / 10;
-        Vector2 position = new Vector2(x * cellSize, -y * cellSize);
-
-        Cell newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
-        newCell.value = 1;
-        newCell.index = index;
-        newCell.SetRoomType(RoomType.Normal);
-
-        spawnedCells.Add(newCell);
-
-        SpawnGameplayRoom(index, RoomType.Normal);
+        Vector3 worldPos = new Vector3(gridPos.x * roomSpacing, gridPos.y * roomSpacing, 0);
+        Cell room = Instantiate(roomPrefab, worldPos, Quaternion.identity, roomParent);
+        room.SetRoomType(RoomType.Normal);
+        rooms.Add(gridPos, room);
+        roomPositions.Add(gridPos);
     }
 
-    private void SpawnGameplayRoom(int index, RoomType type)
+    void AssignSpecialRooms()
     {
-        int x = index % 10;
-        int y = index / 10;
-        Vector2 position = new Vector2(x * cellSize, -y * cellSize);
+        if (roomPositions.Count == 0) return;
 
-        GameObject prefabToUse = normalRoomPrefab;
+        // Boss = najdalej od startu
+        Vector2Int bossRoom = GetFurthestRoom(Vector2Int.zero);
+        rooms[bossRoom].SetRoomType(RoomType.Boss, bossSprite);
+        roomPositions.Remove(bossRoom);
 
-        switch (type)
+        AssignRandomRoom(RoomType.Shop, shopSprite);
+        AssignRandomRoom(RoomType.Item, itemSprite);
+        AssignRandomRoom(RoomType.Secret, secretSprite);
+    }
+
+    void AssignRandomRoom(RoomType type, Sprite icon)
+    {
+        if (roomPositions.Count == 0) return;
+        int index = Random.Range(0, roomPositions.Count);
+        Vector2Int pos = roomPositions[index];
+        rooms[pos].SetRoomType(type, icon);
+        roomPositions.RemoveAt(index);
+    }
+
+    Vector2Int GetFurthestRoom(Vector2Int origin)
+    {
+        Vector2Int furthest = origin;
+        float maxDist = -1;
+        foreach (var pos in roomPositions)
         {
-            case RoomType.Boss: prefabToUse = bossRoomPrefab; break;
-            case RoomType.Item: prefabToUse = itemRoomPrefab; break;
-            case RoomType.Shop: prefabToUse = shopRoomPrefab; break;
-            case RoomType.Secret: prefabToUse = secretRoomPrefab; break;
-        }
-
-        GameObject roomInstance = Instantiate(prefabToUse, position, Quaternion.identity, parentTransform);
-        roomInstance.name = $"Room_{type}_{index}";
-    }
-
-
-    private bool TryPlaceRoom(int origin, int[] offsets)
-    {
-        List<int> currentRoomIndexes = new List<int>() { origin };
-
-        foreach (var offset in offsets)
-        {
-            int currentIndexChecked = origin + offset;
-
-            if (currentIndexChecked - 10 < 0 || currentIndexChecked + 10 >= floorPlan.Length)
+            float dist = Vector2Int.Distance(origin, pos);
+            if (dist > maxDist)
             {
-                return false;
+                maxDist = dist;
+                furthest = pos;
             }
-
-            if (floorPlan[currentIndexChecked] != 0)
-            {
-                return false;
-            }
-
-            if (currentIndexChecked == origin) continue;
-            if (currentIndexChecked % 10 == 0) continue;
-
-            currentRoomIndexes.Add(currentIndexChecked);
         }
-
-        if (currentRoomIndexes.Count == 1) return false;
-
-        foreach (int index in currentRoomIndexes)
-        {
-            floorPlan[index] = 1;
-            floorPlanCount++;
-            cellQueue.Enqueue(index);
-
-            bigRoomIndexes.Add(index);
-        }
-        return true;
+        return furthest;
     }
 
+    List<Vector2Int> Directions()
+    {
+        return new List<Vector2Int> {
+            Vector2Int.up, Vector2Int.down,
+            Vector2Int.left, Vector2Int.right
+        };
+    }
 }

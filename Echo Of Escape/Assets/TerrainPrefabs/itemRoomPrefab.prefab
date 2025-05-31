@@ -47,11 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce0d8e165701384692a1384e4bf1329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  value: 0
-  spriteRenderer: {fileID: 0}
-  roomSprite: {fileID: 0}
-  roomType: 0
+  roomType: 3
+  iconRenderer: {fileID: 0}
 --- !u!212 &3008134198189672586
 SpriteRenderer:
   m_ObjectHideFlags: 0

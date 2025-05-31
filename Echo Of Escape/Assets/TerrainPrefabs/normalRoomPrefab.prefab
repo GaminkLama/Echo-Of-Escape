@@ -131,11 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce0d8e165701384692a1384e4bf1329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  value: 0
-  spriteRenderer: {fileID: 5159352810027768322}
-  roomSprite: {fileID: 5159352810027768322}
   roomType: 0
+  iconRenderer: {fileID: 0}
 --- !u!212 &3008134198189672586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -177,7 +174,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f526112bd6361f64c8a5ae69fd5eab36, type: 3}
+  m_Sprite: {fileID: -498541675, guid: 38f3c1bb574f8d0418aad564184fb4b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,7 +202,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.28125, y: 0.25}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
