@@ -18,6 +18,7 @@ public class MapGenerator : MonoBehaviour
     private Dictionary<Vector2Int, Cell> rooms = new();
     private List<Vector2Int> roomPositions = new();
 
+    public CameraFollow cameraFollow; // przypisz w Inspectorze
     void Start()
     {
         GenerateRooms();
@@ -105,5 +106,13 @@ public class MapGenerator : MonoBehaviour
             Vector2Int.up, Vector2Int.down,
             Vector2Int.left, Vector2Int.right
         };
+    }
+
+    public void SwitchToRoom(Vector2Int roomPos)
+    {
+        if (rooms.ContainsKey(roomPos))
+        {
+            cameraFollow.MoveToRoom(roomPos, roomSpacing);
+        }
     }
 }
