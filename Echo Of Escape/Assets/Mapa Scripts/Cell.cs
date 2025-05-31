@@ -7,8 +7,16 @@ public class Cell : MonoBehaviour
     public int index;
     public int value;
 
+
     public SpriteRenderer spriteRenderer;
     public SpriteRenderer roomSprite;
+
+    public RoomType roomType;
+
+    public void SetRoomType(RoomType type)
+    {
+        this.roomType = type;
+    }
 
     private void Start()
     {

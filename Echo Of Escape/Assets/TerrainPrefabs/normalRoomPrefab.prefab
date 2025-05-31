@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3008134198189672586}
   - component: {fileID: -5318976585751618496}
   m_Layer: 0
-  m_Name: Cell
+  m_Name: normalRoomPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 5031096313531560706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 21.5, y: 12.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4668940143994445319}
@@ -135,6 +135,7 @@ MonoBehaviour:
   value: 0
   spriteRenderer: {fileID: 5159352810027768322}
   roomSprite: {fileID: 5159352810027768322}
+  roomType: 0
 --- !u!212 &3008134198189672586
 SpriteRenderer:
   m_ObjectHideFlags: 0

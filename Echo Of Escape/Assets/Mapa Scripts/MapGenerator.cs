@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 
+
 public class MapGenerator : MonoBehaviour
 {
     private int[] floorPlan;
@@ -15,6 +16,8 @@ public class MapGenerator : MonoBehaviour
     private List<int> endRooms;
 
     public GameObject mapObject;
+
+    private HashSet<int> usedIndexes = new HashSet<int>();
 
     public Transform parentTransform;   
 
@@ -34,6 +37,14 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Sprite shop;
     [SerializeField] private Sprite boss;
     [SerializeField] private Sprite secret;
+
+    [Header("Gameplay Room Prefabs")]
+    public GameObject normalRoomPrefab;
+    public GameObject bossRoomPrefab;
+    public GameObject shopRoomPrefab;
+    public GameObject itemRoomPrefab;
+    public GameObject secretRoomPrefab;
+
 
     [Header("Room Variations")]
     [SerializeField] private Sprite largeRoom;
@@ -165,7 +176,8 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-        SpawnRoom(secretRoomIndex);
+        SpawnRoom(secretRoomIndex, RoomType.Secret);
+
 
         UpdateSpecialRoomVisuals();
     }
@@ -177,21 +189,25 @@ public class MapGenerator : MonoBehaviour
             if (cell.index == itemRoomIndex)
             {
                 cell.SetSpecialRoomSprite(item);
+                cell.SetRoomType(RoomType.Item);
             }
 
             if (cell.index == shopRoomIndex)
             {
                 cell.SetSpecialRoomSprite(shop);
+                cell.SetRoomType(RoomType.Boss);
             }
 
             if (cell.index == bossRoomIndex)
             {
                 cell.SetSpecialRoomSprite(boss);
+                cell.SetRoomType(RoomType.Boss);
             }
 
             if (cell.index == secretRoomIndex)
             {
                 cell.SetSpecialRoomSprite(secret);
+                cell.SetRoomType(RoomType.Secret);
             }
         }
     }
@@ -268,12 +284,12 @@ public class MapGenerator : MonoBehaviour
         floorPlan[index] = 1;
         floorPlanCount++;
 
-        SpawnRoom(index);
+        SpawnRoom(index, RoomType.Normal);
 
         return true;
     }
 
-    private void SpawnRoom(int index)
+    private void SpawnRoom(int index, RoomType type)
     {
         int x = index % 10;
         int y = index / 10;
@@ -282,9 +298,33 @@ public class MapGenerator : MonoBehaviour
         Cell newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
         newCell.value = 1;
         newCell.index = index;
+        newCell.SetRoomType(RoomType.Normal);
 
         spawnedCells.Add(newCell);
+
+        SpawnGameplayRoom(index, RoomType.Normal);
     }
+
+    private void SpawnGameplayRoom(int index, RoomType type)
+    {
+        int x = index % 10;
+        int y = index / 10;
+        Vector2 position = new Vector2(x * cellSize, -y * cellSize);
+
+        GameObject prefabToUse = normalRoomPrefab;
+
+        switch (type)
+        {
+            case RoomType.Boss: prefabToUse = bossRoomPrefab; break;
+            case RoomType.Item: prefabToUse = itemRoomPrefab; break;
+            case RoomType.Shop: prefabToUse = shopRoomPrefab; break;
+            case RoomType.Secret: prefabToUse = secretRoomPrefab; break;
+        }
+
+        GameObject roomInstance = Instantiate(prefabToUse, position, Quaternion.identity, parentTransform);
+        roomInstance.name = $"Room_{type}_{index}";
+    }
+
 
     private bool TryPlaceRoom(int origin, int[] offsets)
     {
@@ -320,60 +360,7 @@ public class MapGenerator : MonoBehaviour
 
             bigRoomIndexes.Add(index);
         }
-
-        SpawnLargeRoom(currentRoomIndexes);
-
         return true;
     }
 
-    private void SpawnLargeRoom(List<int> largeRoomIndexes)
-    {
-        Cell newCell = null;
-
-        int combinedX = default;
-        int combinedY = default;
-        float offset = cellSize / 2f;
-
-        for (int i = 0; i < largeRoomIndexes.Count; i++)
-        {
-            int x = largeRoomIndexes[i] % 10;
-            int y = largeRoomIndexes[i] / 10;
-            combinedX += x;
-            combinedY += y;
-        }
-
-        if (largeRoomIndexes.Count == 4)
-        {
-            Vector2 position = new Vector2(combinedX / 4 * cellSize + offset, -combinedY / 4 * cellSize - offset);
-
-            newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
-            newCell.SetRoomSprite(largeRoom);
-        }
-
-        if (largeRoomIndexes.Count == 3)
-        {
-            Vector2 position = new Vector2(combinedX / 3 * cellSize + offset, -combinedY / 3 * cellSize - offset);
-            newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
-            newCell.SetRoomSprite(lShapeRoom);
-            newCell.RotateCell(largeRoomIndexes);
-        }
-
-        if (largeRoomIndexes.Count == 2)
-        {
-            if (largeRoomIndexes[0] + 10 == largeRoomIndexes[1] || largeRoomIndexes[0] - 10 == largeRoomIndexes[1])
-            {
-                Vector2 position = new Vector2(combinedX / 2 * cellSize, -combinedY / 2 * cellSize - offset);
-                newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
-                newCell.SetRoomSprite(verticalRoom);
-            }
-            else if (largeRoomIndexes[0] + 1 == largeRoomIndexes[1] || largeRoomIndexes[0] - 1 == largeRoomIndexes[1])
-            {
-                Vector2 position = new Vector2(combinedX / 2 * cellSize + offset, -combinedY / 2 * cellSize);
-                newCell = Instantiate(cellPrefab, position, Quaternion.identity, parentTransform);
-                newCell.SetRoomSprite(horizontalRoom);
-            }
-        }
-
-        spawnedCells.Add(newCell);
-    }
 }
