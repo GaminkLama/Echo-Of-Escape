@@ -43,12 +43,15 @@ public class MapGenerator : MonoBehaviour
                     AddRoom(next);
                     expansionQueue.Enqueue(next);
 
+                    // Otwórz drzwi miêdzy current a next
+                    rooms[current].OpenDoor(dir);
+                    rooms[next].OpenDoor(-dir);
+
                     if (rooms.Count >= roomCount)
                         break;
                 }
             }
         }
-
         AssignSpecialRooms();
     }
 
