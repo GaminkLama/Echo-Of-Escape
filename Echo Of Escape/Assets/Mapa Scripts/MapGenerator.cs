@@ -110,12 +110,4 @@ public class MapGenerator : MonoBehaviour
             Vector2Int.left, Vector2Int.right
         };
     }
-
-    public void SwitchToRoom(Vector2Int roomPos)
-    {
-        if (rooms.ContainsKey(roomPos))
-        {
-            cameraFollow.MoveToRoom(roomPos, roomSpacing);
-        }
-    }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class DoorTeleport : MonoBehaviour
 {
     public Vector2Int direction; // np. (0, 1) dla góry
-    public float roomSpacing = 10f;
+    public float roomSpacing = 1f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
