@@ -7,7 +7,7 @@ internal class enemy : MonoBehaviour
 
     private void Update()
     {
-        var position = movement.Instance.transform.position;
+        var position = PlayerMovement.Instance.transform.position;
         //body.MovePosition(position);
         transform.position = Vector2.MoveTowards(transform.position, position, ms * Time.deltaTime);
     }

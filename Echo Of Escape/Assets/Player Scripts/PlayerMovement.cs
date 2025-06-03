@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
     private Vector2 movement;
     [SerializeField] private float speed;
     private Rigidbody2D rb;
@@ -14,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-         rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.drag = 5f; // wiêksza wartoœæ = szybsze zatrzymywanie
     }
 
     void Update()
