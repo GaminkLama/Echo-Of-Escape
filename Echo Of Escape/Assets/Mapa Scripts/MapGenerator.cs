@@ -69,9 +69,15 @@ public class MapGenerator : MonoBehaviour
         if (roomPositions.Count == 0) return;
 
         // Boss = najdalej od startu
-        Vector2Int bossRoom = GetFurthestRoom(Vector2Int.zero);
+        Vector2Int startRoom = Vector2Int.zero;
+        Vector2Int bossRoom = GetFurthestRoom(startRoom);
+        if (bossRoom == startRoom && roomPositions.Count > 1)
+        {
+            bossRoom = GetFurthestRoom(startRoom);
+        }
         rooms[bossRoom].SetRoomType(RoomType.Boss, bossSprite);
         roomPositions.Remove(bossRoom);
+        roomPositions.Remove(Vector2Int.zero);
 
         AssignRandomRoom(RoomType.Shop, shopSprite);
         AssignRandomRoom(RoomType.Item, itemSprite);
@@ -94,6 +100,23 @@ public class MapGenerator : MonoBehaviour
         foreach (var pos in roomPositions)
         {
             float dist = Vector2Int.Distance(origin, pos);
+            if (dist > maxDist)
+            {
+                maxDist = dist;
+                furthest = pos;
+            }
+        }
+        return furthest;
+    }
+
+    Vector2Int GetFurthestRoomExept(Vector2Int excluded)
+    {
+        Vector2Int furthest = excluded;
+        float maxDist = -1;
+        foreach (var pos in roomPositions)
+        {
+            if (pos == excluded) continue;
+            float dist = Vector2Int.Distance(excluded, pos);
             if (dist > maxDist)
             {
                 maxDist = dist;

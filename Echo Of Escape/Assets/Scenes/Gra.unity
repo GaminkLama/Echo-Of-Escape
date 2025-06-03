@@ -537,7 +537,7 @@ MonoBehaviour:
   roomPrefab: {fileID: 8618926588064084611, guid: 85c6c069b67fc764c86ca83fec9e04f5, type: 3}
   roomParent: {fileID: 216422564}
   roomCount: 12
-  roomSpacing: 15
+  roomSpacing: 12
   bossSprite: {fileID: 1332096903, guid: 38f3c1bb574f8d0418aad564184fb4b2, type: 3}
   shopSprite: {fileID: -382425187, guid: 38f3c1bb574f8d0418aad564184fb4b2, type: 3}
   itemSprite: {fileID: -1202685125, guid: 38f3c1bb574f8d0418aad564184fb4b2, type: 3}

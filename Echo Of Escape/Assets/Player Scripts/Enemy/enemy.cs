@@ -1,10 +1,9 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 internal class enemy : MonoBehaviour
 {
     public float ms;
-    public Rigidbody body;
+    public Rigidbody2D body;
 
     private void Update()
     {
