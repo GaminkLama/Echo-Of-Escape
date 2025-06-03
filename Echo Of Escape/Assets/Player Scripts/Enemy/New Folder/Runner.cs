@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-internal class enemy : MonoBehaviour
+internal class Runner : MonoBehaviour
 {
     public float ms;
     public Rigidbody2D body;

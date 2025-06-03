@@ -14,7 +14,7 @@ public class Square : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         // Sprawdü, czy obiekt ma EnemyHealth
-        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        RunnerHealth enemy = collision.gameObject.GetComponent<RunnerHealth>();
         if (enemy != null)
         {
             enemy.TakeDamage(attackDamage);

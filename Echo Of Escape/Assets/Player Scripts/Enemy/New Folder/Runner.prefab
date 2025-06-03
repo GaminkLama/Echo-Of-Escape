@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4208202719824258743}
   - component: {fileID: 4208202719824258739}
   - component: {fileID: -977008402552990510}
-  - component: {fileID: 507021331397344008}
+  - component: {fileID: 6921928737245671320}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Runner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4208202719824258744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.258, y: 2.5983334, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0137fafc252554e980af9b0e6ac413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ms: 3
-  body: {fileID: 0}
+  ms: 1
+  body: {fileID: 4208202719824258739}
 --- !u!50 &4208202719824258739
 Rigidbody2D:
   serializedVersion: 4
@@ -143,15 +143,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10000
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 0.2
+  m_LinearDrag: 1
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-977008402552990510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
---- !u!114 &507021331397344008
+--- !u!114 &6921928737245671320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,6 +174,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4208202719824258744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e391b198463f07c4fb188479812c57a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0137fafc252554e980af9b0e6ac413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ms: 4
+  body: {fileID: 4208202719824258739}
