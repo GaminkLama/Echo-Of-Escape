@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 3
+  speed: 1.5
   stopDistance: 1.5
 --- !u!114 &4458966965153953701
 MonoBehaviour:

@@ -4,6 +4,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 3;
     private int currentHealth;
+    public RoomControler room; // Referencja do RoomControler, aby powiadomić o śmierci
 
     void Start()
     {
@@ -23,7 +24,12 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        // Tu możesz dodać animację śmierci, efekt dźwiękowy itd.
+        if (room == null)
+        {
+            room.OnEnemyKilled(gameObject);
+            
+        }
         Destroy(gameObject);
+        
     }
 }
