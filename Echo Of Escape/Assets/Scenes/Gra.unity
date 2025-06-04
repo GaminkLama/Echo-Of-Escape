@@ -319,7 +319,7 @@ MonoBehaviour:
   squarePrefab: {fileID: 6799053713627144742, guid: d6def21c32c2c6749a553ee67ccfdbe9, type: 3}
   firePoint: {fileID: 901069655}
   attackCooldown: 2
-  attackRange: 0.25
+  attackRange: 0.2
 --- !u!1 &216422563
 GameObject:
   m_ObjectHideFlags: 0

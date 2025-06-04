@@ -1,9 +1,8 @@
-
 using UnityEngine;
 
-public class RunnerHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] public int maxHealth;
+    public int maxHealth = 3;
     private int currentHealth;
 
     void Start()
@@ -14,17 +13,17 @@ public class RunnerHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        Debug.Log($"{gameObject.name} HP: {currentHealth}");
+        Debug.Log($"{gameObject.name} took {amount} damage. HP left: {currentHealth}");
 
         if (currentHealth <= 0)
         {
-            KillEnemy();
+            Die();
         }
     }
 
-    void KillEnemy()
+    void Die()
     {
+        // Tu możesz dodać animację śmierci, efekt dźwiękowy itd.
         Destroy(gameObject);
     }
 }
-

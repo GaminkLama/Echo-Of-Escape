@@ -29,7 +29,7 @@ public class Attacking : MonoBehaviour
 
         Vector2 direction = toMouse.normalized;
 
-        // Sprawdzamy: jeœli kursor jest dalej ni¿ attackRange, ograniczamy zasiêg
+        // Sprawdzamy: jeï¿½li kursor jest dalej niï¿½ attackRange, ograniczamy zasiï¿½g
         float spawnDistance = Mathf.Min(distanceToMouse, attackRange);
         Vector3 spawnPosition = firePoint.position + (Vector3)(direction * spawnDistance);
 

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class Runner : MonoBehaviour
+public class Tank : MonoBehaviour
 {
     public Transform player;
     public float speed = 3f;

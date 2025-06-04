@@ -13,14 +13,13 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // SprawdŸ, czy obiekt ma EnemyHealth
-        RunnerHealth enemy = collision.gameObject.GetComponent<RunnerHealth>();
+        // Sprawdï¿½, czy obiekt ma EnemyHealth
+        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
             enemy.TakeDamage(bulletDamage);
         }
-
-        // Zniszcz pocisk w ka¿dym przypadku
+        // Zniszcz pocisk w kaï¿½dym przypadku
         Destroy(gameObject);
     }
 }

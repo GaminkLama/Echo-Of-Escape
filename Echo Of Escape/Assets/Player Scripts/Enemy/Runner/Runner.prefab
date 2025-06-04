@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4208202719824258742}
   - component: {fileID: 4208202719824258743}
   - component: {fileID: 4208202719824258739}
-  - component: {fileID: -977008402552990510}
   - component: {fileID: 6921928737245671320}
+  - component: {fileID: 4458966965153953701}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Untagged
@@ -153,19 +153,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-977008402552990510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4208202719824258744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2fabf8f3d539894aa91a814864b001c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
 --- !u!114 &6921928737245671320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,3 +168,16 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 3
   stopDistance: 1.5
+--- !u!114 &4458966965153953701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208202719824258744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d233f3454ec2941a6fd108de601a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
