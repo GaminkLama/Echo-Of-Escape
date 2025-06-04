@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8893a84292f7d4eba72100bad1312d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 14
 --- !u!114 &104830175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   squarePrefab: {fileID: 6799053713627144742, guid: d6def21c32c2c6749a553ee67ccfdbe9, type: 3}
   firePoint: {fileID: 901069655}
   attackCooldown: 2
-  attackRange: 0.5
+  attackRange: 0.25
 --- !u!1 &216422563
 GameObject:
   m_ObjectHideFlags: 0
