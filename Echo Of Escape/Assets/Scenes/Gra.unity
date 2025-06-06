@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265fd81162d5ac64eaed18afa70cb18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 10
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls:
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 8618926588064084611, guid: 85c6c069b67fc764c86ca83fec9e04f5, type: 3}
   roomParent: {fileID: 216422564}
-  roomCount: 12
+  roomCount: 15
   roomSpacing: 12
   bossSprite: {fileID: 1332096903, guid: 38f3c1bb574f8d0418aad564184fb4b2, type: 3}
   shopSprite: {fileID: -382425187, guid: 38f3c1bb574f8d0418aad564184fb4b2, type: 3}
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.22627181, b: 0.09202562, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

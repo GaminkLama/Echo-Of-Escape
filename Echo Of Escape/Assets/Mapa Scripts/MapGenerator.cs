@@ -83,6 +83,7 @@ public class MapGenerator : MonoBehaviour
             bossRoom = GetFurthestRoom(startRoom);
         }
         rooms[bossRoom].SetRoomType(RoomType.Boss, bossSprite);
+        EnableBossRoomPortal(bossRoom);
         roomPositions.Remove(bossRoom);
         roomPositions.Remove(Vector2Int.zero);
 
@@ -132,6 +133,16 @@ public class MapGenerator : MonoBehaviour
         }
         return furthest;
     }
+
+    void EnableBossRoomPortal(Vector2Int bossRoomPos)
+    {
+        Cell bossRoom = rooms[bossRoomPos];
+        Transform portal = bossRoom.transform.Find("NFPortal");
+
+        if (portal != null)
+            portal.gameObject.SetActive(true);
+    }
+
 
     List<Vector2Int> Directions()
     {
