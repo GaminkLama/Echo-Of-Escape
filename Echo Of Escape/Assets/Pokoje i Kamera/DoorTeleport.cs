@@ -9,7 +9,7 @@ public class DoorTeleport : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Sraka = roomSpacing - 4;
+        Sraka = roomSpacing - 1.3f;
         if (other.CompareTag("Player"))
         {
             // Oblicz now¹ pozycjê gracza

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34a3c458c6dd1f740a72c6ee6e61ea4e
+guid: 274da278e018ba149bf384e7862c6516
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,8 +47,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 3, z: 0, w: 10}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 32, y: 15, z: 32, w: 16}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_left_0
+      name: Tank_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 16
-        width: 29
-        height: 104
+        x: 32
+        y: 15
+        width: 64
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a52d7161c005ca94890edba4e48907cf
-      internalID: 198601544
+      spriteID: 71df296919314bc41aba86a4fe84414e
+      internalID: 140747608
       vertices: []
       indices: 
       edges: []
@@ -136,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite_left_0: 198601544
+      Tank_0: 140747608
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
