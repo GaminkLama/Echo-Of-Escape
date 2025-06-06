@@ -4,7 +4,7 @@ public class ShooterBullet : MonoBehaviour
 {
     public float speed = 10f;
     public float lifeTime = 5f;
-    public int damage = 1;
+    public int bulletDamage = 1;
 
     void Start()
     {
@@ -20,17 +20,19 @@ public class ShooterBullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Tu możesz dodać odniesienie do skryptu gracza i zmniejszyć HP
-            Debug.Log("Gracz trafiony!");
-
-            // Przykład:
-            // collision.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+            // Szukamy komponentu PlayerHealth w obiekcie, w który uderzyliśmy
+            PlayerHealth player = collision.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(bulletDamage);
+                Debug.Log("Gracz trafiony!");
+            }
 
             Destroy(gameObject);
         }
         else if (!collision.isTrigger)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // zderzył się z czymś innym, np. ścianą
         }
     }
 }

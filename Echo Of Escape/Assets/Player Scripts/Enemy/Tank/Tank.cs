@@ -30,4 +30,14 @@ public class Tank : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
         }
     }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+        if (player != null)
+        {
+            player.TakeDamage(1); // lub dowolna ilość obrażeń
+        }
+    }
+
 }

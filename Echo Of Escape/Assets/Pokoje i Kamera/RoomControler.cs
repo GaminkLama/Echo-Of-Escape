@@ -13,6 +13,19 @@ public class RoomControler : MonoBehaviour
 
     public GameObject[] doors; // drzwi do zamknięcia
 
+    private void Awake()
+    {
+        if (roomCenter == null)
+        {
+            roomCenter = transform.Find("RoomCenter");
+        }
+
+        if (doors == null || doors.Length == 0)
+        {
+            doors = GameObject.FindGameObjectsWithTag("Door"); // lub lepiej: przeszukaj tylko dzieci
+            Debug.Log("Automatycznie przypisano drzwi do: " + gameObject.name);
+        }
+    }
 
 
 

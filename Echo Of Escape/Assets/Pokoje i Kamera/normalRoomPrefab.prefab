@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 200145099807221600}
   m_Layer: 0
   m_Name: DrzwiGora
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -623,6 +623,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &815803819088407840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4114712264482587172}
+  - component: {fileID: 1461634081408421316}
+  m_Layer: 0
+  m_Name: RoomContoller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4114712264482587172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815803819088407840}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.07692307, y: 0.07692307, z: 0.07692307}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6223039295419089586}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461634081408421316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815803819088407840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fd74ca3d3a3ab4d9f3a67ed7692b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 4208202719824258744, guid: 729b12e5557e40544b67c8d0c58d9f2d, type: 3}
+  - {fileID: 862358466236676884, guid: 57fd72f87be2b4b409d87daafe07179a, type: 3}
+  - {fileID: 6584140820682762507, guid: 9659972498a8ecc40a32ec5ad3389b6d, type: 3}
+  roomCenter: {fileID: 3335039245265191065}
+  roomWidth: 6
+  roomHeight: 6
+  enemiesToSpawn: 5
+  doors:
+  - {fileID: 590420670954396523}
+  - {fileID: 2088465017021270910}
+  - {fileID: 7303494685797196377}
+  - {fileID: 5373119711232788480}
 --- !u!1 &987610656407287474
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +1029,7 @@ GameObject:
   - component: {fileID: 8081287052605275781}
   m_Layer: 0
   m_Name: drzwiDol
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1811,6 +1868,7 @@ Transform:
   - {fileID: 5305687909893346357}
   - {fileID: 741983024429127040}
   - {fileID: 3335039245265191065}
+  - {fileID: 4114712264482587172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2091,7 +2149,7 @@ GameObject:
   - component: {fileID: 7919009103315889744}
   m_Layer: 0
   m_Name: DrzwiPrawa
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2481,7 +2539,7 @@ GameObject:
   - component: {fileID: 6048147519427583221}
   - component: {fileID: 910361943224273918}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: RoomCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2514,7 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bde2a8de9a63442bc6c7c12ea64a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomControler: {fileID: 0}
+  roomControler: {fileID: 1461634081408421316}
 --- !u!61 &910361943224273918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2554,7 +2612,7 @@ GameObject:
   - component: {fileID: 1587852803719950830}
   m_Layer: 0
   m_Name: DrzwiLewa
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

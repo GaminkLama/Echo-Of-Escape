@@ -1,21 +1,22 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // do restartu gry
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int PlayerMaxHealth = 5;
-    public int PlayerCurrentHealth;
+    public int maxHealth = 5;
+    private int currentHealth;
 
     void Start()
     {
-        PlayerCurrentHealth = PlayerMaxHealth;
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int amount)
     {
-        PlayerCurrentHealth -= amount;
-        Debug.Log($"Gracz otrzyma≥ {amount} obraøeÒ. Pozosta≥o HP: {PlayerCurrentHealth}");
+        currentHealth -= amount;
+        Debug.Log("Gracz otrzyma≈Ç obra≈ºenia. Pozosta≈Çe HP: " + currentHealth);
 
-        if (PlayerCurrentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -23,7 +24,9 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Gracz zginπ≥.");
-        // np. respawn, koniec gry, itp.
+        Debug.Log("Gracz zginƒÖ≈Ç!");
+        Destroy(gameObject);
+        // Mo≈ºesz pokazaƒá ekran przegranej albo restart sceny:
+        SceneManager.LoadSceneAsync(2);
     }
 }

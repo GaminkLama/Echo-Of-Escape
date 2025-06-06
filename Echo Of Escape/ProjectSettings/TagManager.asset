@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - New tag
   - SpawnPoint
   - Rooms
+  - Door
   layers:
   - Default
   - TransparentFX
