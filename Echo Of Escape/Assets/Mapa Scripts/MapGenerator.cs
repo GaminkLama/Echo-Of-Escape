@@ -43,7 +43,7 @@ public class MapGenerator : MonoBehaviour
                     AddRoom(next);
                     expansionQueue.Enqueue(next);
 
-                    // Otwórz drzwi miêdzy current a next
+                    // Otwï¿½rz drzwi miï¿½dzy current a next
                     rooms[current].OpenDoor(dir);
                     rooms[next].OpenDoor(-dir);
 
@@ -62,6 +62,13 @@ public class MapGenerator : MonoBehaviour
         room.SetRoomType(RoomType.Normal);
         rooms.Add(gridPos, room);
         roomPositions.Add(gridPos);
+            // WyÅ‚Ä…cz spawn w pokoju startowym
+        if (gridPos == Vector2Int.zero)
+        {
+            RoomControler rc = room.GetComponent<RoomControler>();
+            if (rc != null)
+                rc.disableSpawning = true;
+        }
     }
 
     void AssignSpecialRooms()

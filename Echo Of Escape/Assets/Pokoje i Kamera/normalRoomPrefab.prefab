@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 1}
-  roomSpacing: 11
+  roomSpacing: 12
   destination: {fileID: 0}
 --- !u!61 &200145099807221600
 BoxCollider2D:
@@ -675,6 +675,7 @@ MonoBehaviour:
   roomWidth: 6
   roomHeight: 6
   enemiesToSpawn: 5
+  disableSpawning: 0
   doors:
   - {fileID: 590420670954396523}
   - {fileID: 2088465017021270910}
@@ -1063,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
-  roomSpacing: 11
+  roomSpacing: 12
   destination: {fileID: 0}
 --- !u!61 &8081287052605275781
 BoxCollider2D:
@@ -2183,7 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0}
-  roomSpacing: 11
+  roomSpacing: 12
   destination: {fileID: 0}
 --- !u!61 &7919009103315889744
 BoxCollider2D:
@@ -2646,7 +2647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: -1, y: 0}
-  roomSpacing: 11
+  roomSpacing: 12
   destination: {fileID: 0}
 --- !u!61 &1587852803719950830
 BoxCollider2D:

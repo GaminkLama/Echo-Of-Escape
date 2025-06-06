@@ -5,6 +5,9 @@ public class Runner : MonoBehaviour
     public Transform player;
     public float speed = 3f;
     public float stopDistance = 1.5f;
+    private float damageCooldown = 1.5f; // ile czasu między obrażeniami
+    private float lastDamageTime = -Mathf.Infinity;
+
 
     void Start()
     {
@@ -30,13 +33,20 @@ public class Runner : MonoBehaviour
             transform.position += direction * speed * Time.deltaTime;
         }
     }
+    
+    
         void OnCollisionEnter2D(Collision2D collision)
     {
-        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-        if (player != null)
+        if (Time.time >= lastDamageTime + damageCooldown)
         {
-            player.TakeDamage(1); // lub dowolna ilość obrażeń
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(1);
+                lastDamageTime = Time.time;
+            }
         }
     }
+
 
 }

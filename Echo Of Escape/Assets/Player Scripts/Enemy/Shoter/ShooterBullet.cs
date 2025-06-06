@@ -30,9 +30,5 @@ public class ShooterBullet : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (!collision.isTrigger)
-        {
-            Destroy(gameObject); // zderzył się z czymś innym, np. ścianą
-        }
     }
 }

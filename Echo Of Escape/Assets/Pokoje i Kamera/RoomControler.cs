@@ -11,6 +11,8 @@ public class RoomControler : MonoBehaviour
     public int enemiesToSpawn = 5;
     private List<GameObject> aliveEnemies = new List<GameObject>();
 
+    public bool disableSpawning = false;
+
     public GameObject[] doors; // drzwi do zamknięcia
 
     private void Awake()
@@ -38,6 +40,8 @@ public class RoomControler : MonoBehaviour
             triggered = true;
             CloseDoors();
             SpawnEnemies();
+            if (!disableSpawning)
+                SpawnEnemies();
         }
     }
 
