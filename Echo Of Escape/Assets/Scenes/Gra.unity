@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 6799053713627144742, guid: d6def21c32c2c6749a553ee67ccfdbe9, type: 3}
   firePoint: {fileID: 901069655}
-  attackCooldown: 2
+  attackCooldown: 3
   attackRange: 0
 --- !u!95 &104830178
 Animator:
